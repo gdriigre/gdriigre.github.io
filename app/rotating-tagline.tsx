@@ -18,7 +18,9 @@ function splitCharacters(text: string) {
   return Array.from(text);
 }
 
-function Phrase({ text, phase }: { text: string; phase: 'is-entering' | 'is-leaving' }) {
+type PhrasePhase = 'is-current' | 'is-entering' | 'is-leaving';
+
+function Phrase({ text, phase }: { text: string; phase: PhrasePhase }) {
   return (
     <span className={`rotating-tagline-phrase ${phase}`} aria-hidden="true">
       {splitCharacters(text).map((character, index) => (
@@ -36,32 +38,35 @@ function Phrase({ text, phase }: { text: string; phase: 'is-entering' | 'is-leav
 
 export function RotatingTagline() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [phase, setPhase] = useState<'is-entering' | 'is-leaving'>('is-entering');
+  const [previousIndex, setPreviousIndex] = useState<number | null>(null);
   const currentIndexRef = useRef(0);
-  const switchPhraseRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const transitionRef = useRef(false);
+  const finishTransitionRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
 
     const rotate = () => {
-      if (preference.matches || document.hidden) return;
+      if (preference.matches || document.hidden || transitionRef.current) return;
 
-      setPhase('is-leaving');
-      if (switchPhraseRef.current) clearTimeout(switchPhraseRef.current);
-      switchPhraseRef.current = setTimeout(() => {
-        const previousIndex = currentIndexRef.current;
-        const offset = 1 + Math.floor(Math.random() * (phrases.length - 1));
-        const nextIndex = (previousIndex + offset) % phrases.length;
-        currentIndexRef.current = nextIndex;
-        setCurrentIndex(nextIndex);
-        setPhase('is-entering');
-      }, 560);
+      const outgoingIndex = currentIndexRef.current;
+      const nextIndex = (outgoingIndex + 1) % phrases.length;
+      transitionRef.current = true;
+      currentIndexRef.current = nextIndex;
+      setPreviousIndex(outgoingIndex);
+      setCurrentIndex(nextIndex);
+
+      if (finishTransitionRef.current) clearTimeout(finishTransitionRef.current);
+      finishTransitionRef.current = setTimeout(() => {
+        setPreviousIndex(null);
+        transitionRef.current = false;
+      }, 760);
     };
 
-    const intervalId = window.setInterval(rotate, 2800);
+    const intervalId = window.setInterval(rotate, 3200);
     return () => {
       window.clearInterval(intervalId);
-      if (switchPhraseRef.current) clearTimeout(switchPhraseRef.current);
+      if (finishTransitionRef.current) clearTimeout(finishTransitionRef.current);
     };
   }, []);
 
@@ -71,7 +76,18 @@ export function RotatingTagline() {
       <span className="rotating-tagline-visual" aria-hidden="true">
         <span className="rotating-tagline-prefix">用 AI，</span>
         <span className="rotating-tagline-window">
-          <Phrase key={currentIndex} text={phrases[currentIndex]} phase={phase} />
+          {previousIndex !== null && (
+            <Phrase
+              key={`leaving-${previousIndex}-${currentIndex}`}
+              text={phrases[previousIndex]}
+              phase="is-leaving"
+            />
+          )}
+          <Phrase
+            key={`current-${currentIndex}`}
+            text={phrases[currentIndex]}
+            phase={previousIndex === null ? 'is-current' : 'is-entering'}
+          />
         </span>
       </span>
     </h2>
