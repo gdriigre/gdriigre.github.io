@@ -52,8 +52,13 @@
 @media (max-width: 560px) {
   .site-header:has(.gooey-nav-container) { min-height: 77px; height: auto; padding-block: 16px; }
   .gooey-nav-container.main-nav { font-size: 12px; }
-  .gooey-nav-container ul { gap: 2px; justify-content: flex-end; }
-  .gooey-nav-container.main-nav a { padding-inline: 6px; }
+  .gooey-nav-container ul { gap: 1px; justify-content: flex-end; }
+  .gooey-nav-container.main-nav a { padding-inline: 4px; }
+}
+@media (max-width: 360px) {
+  .gooey-nav-container.main-nav { font-size: 11px; }
+  .gooey-nav-container ul { gap: 0; }
+  .gooey-nav-container.main-nav a { padding-inline: 2px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .gooey-effect { display: none; }

@@ -3,8 +3,8 @@ import './globals.css';
 import SplashCursor from './splash-cursor';
 
 export const metadata: Metadata = {
-  title: '谢达 XIE DA — 内容创作与智能体应用',
-  description: '谢达的个人简历：环境艺术设计专业背景，求职方向为剪辑运营、内容创作、图片创作与智能体应用。了解个人经历、联系谢达或下载 PDF 简历。',
+  title: '谢达 XIE DA — AI 内容制作与 AIGC 视频',
+  description: '谢达的个人作品集：短视频剪辑、即梦 AI 视频制作与环境艺术设计基础。',
   icons: { icon: '/favicon.svg' },
 };
 

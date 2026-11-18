@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowRight, ArrowUpRight, Bot, CodeXml, Download, Film, FolderOpen, GraduationCap, Image as ImageIcon, Mail, MapPin, PenLine, Phone, Sparkles } from 'lucide-react';
+import { ArrowDown, ArrowRight, ArrowUpRight, Bot, CodeXml, Film, GraduationCap, Image as ImageIcon, Mail, MapPin, PenLine, Phone, Sparkles } from 'lucide-react';
 import { PrintResume } from './print-resume';
 import { GazePortrait } from './gaze-portrait';
 import GooeyNav from './gooey-nav';
@@ -6,13 +6,13 @@ import { ProjectShowcase } from './project-showcase';
 import { RotatingTagline } from './rotating-tagline';
 import { StrokeText } from './stroke-text';
 import { EntryIntro } from './entry-intro';
+import { AiVideoGallery } from './ai-video-gallery';
 
-const interests = ['剪辑运营', '内容创作', '图片创作', '智能体应用'];
-const resumeUrl = '/resume/xie-da-aigc-resume.pdf';
-const resumeFilename = '谢达_AIGC视觉设计方向_简历优化版.pdf';
+const interests = ['AI 内容制作', 'AIGC 视频', '短视频剪辑', '智能体应用（未来方向）'];
 const designTools = ['Photoshop', 'AutoCAD', 'SketchUp', '3ds Max', 'Revit'];
 const experiences = [
-  { date: '目前 · 已工作 4 个月', company: '长沙某家装公司', role: '家装设计相关工作', description: '目前从事家装设计相关工作，接触住宅空间的设计与改造内容。' },
+  { date: '2025.07 — 至今（时间待确认）', company: '长沙雨花区宠物电商（公司名称待补充）', role: '视频剪辑 / AI 视频制作', description: '围绕宠物用品制作短视频，使用即梦进行首帧图、视频生成及运镜调整，结合剪映完成剪辑、字幕与成片；拆解同类内容并进行多账号分发。作品数量与成果待补充。' },
+  { date: '此前经历 · 工作 4 个月', company: '长沙某家装公司', role: '家装设计相关工作', description: '曾从事家装设计相关工作，接触住宅空间的设计与改造内容。' },
   { date: '工作 4 个月', company: '长沙某别墅改造公司', role: '别墅改造相关工作', description: '参与别墅改造相关工作，接触住宅空间改造与设计内容。' },
   { date: '工作 6 个月', company: '长沙某灯光设计公司', role: '灯光设计相关工作', description: '参与灯光设计相关工作，接触空间照明与灯光设计内容。' },
 ];
@@ -35,13 +35,13 @@ export default function Home() {
             <p className="hello">Hello, I’m</p>
             <h1 id="hero-title" aria-label="谢达，XIE DA。">谢达<StrokeText className="latin-name" text="XIE DA." strokeColor="#a957ce" fillColor="#292b32" accentColor="#b95dde" accentLast strokeWidth={1.35} interactive /></h1>
             <RotatingTagline />
-            <p className="hero-description is-stroke-description" aria-label="以设计为基础，探索内容与 AI 的更多可能。求职方向：剪辑运营、内容创作、图片创作、智能体应用。">
-              <StrokeText className="hero-description-line" text="以设计为基础，探索内容与 AI 的更多可能。" strokeColor="#a776bb" fillColor="#74717e" strokeWidth={0.65} drawDuration={0.85} stagger={0.025} delay={0.15} />
-              <StrokeText className="hero-description-line" text="求职方向：剪辑运营 · 内容创作 · 图片创作 · 智能体应用" strokeColor="#a776bb" fillColor="#74717e" strokeWidth={0.65} drawDuration={0.85} stagger={0.025} delay={0.32} />
+            <p className="hero-description is-stroke-description" aria-label="一年多短视频剪辑经验，使用剪映与即梦完成 AI 视频制作。求职方向：AI 内容制作、AIGC 视频。">
+              <StrokeText className="hero-description-line" text="一年多短视频经验，探索 AI 内容创作。" strokeColor="#a776bb" fillColor="#74717e" strokeWidth={0.65} drawDuration={0.85} stagger={0.025} delay={0.15} />
+              <StrokeText className="hero-description-line" text="求职方向：AI 内容制作 · AIGC 视频" strokeColor="#a776bb" fillColor="#74717e" strokeWidth={0.65} drawDuration={0.85} stagger={0.025} delay={0.32} />
             </p>
             <div className="hero-actions">
               <a className="action primary-action" href="#contact">联系我<ArrowUpRight size={18} /></a>
-              <a className="action secondary-action" href={resumeUrl} download={resumeFilename}>下载 PDF 简历<Download size={17} /></a>
+              <a className="action secondary-action" href="#ai-work">AI 视频作品<ArrowUpRight size={17} /></a>
             </div>
             <div className="hero-school"><GraduationCap size={18} /><span>毕业于长沙环境保护职业技术学院</span></div>
           </div>
@@ -88,7 +88,7 @@ export default function Home() {
             <p className="eyebrow">01 — CREATIVE FOCUS</p>
             <h2 id="creative-title">What I Do<span>.</span></h2>
             <h3>把创意做出来。</h3>
-            <p>希望从事剪辑运营、内容与图片创作相关工作，也关注智能体在创作流程中的应用，让创意表达与实际需求相连接。</p>
+            <p>专注 AI 内容制作与短视频剪辑，结合分镜、即梦生成和剪映后期，把创意变成可交付的内容。</p>
             <div className="interest-tags">{interests.map((interest) => <span key={interest}>{interest}</span>)}</div>
             <a href="#about" className="text-link">更多关于我<ArrowRight size={17} /></a>
           </div>
@@ -96,14 +96,24 @@ export default function Home() {
 
         <ProjectShowcase />
 
+        <section className="ai-work-section container" id="ai-work" aria-labelledby="ai-work-title">
+          <div className="ai-work-copy">
+            <p className="eyebrow">02 / AI VIDEO SHOWCASE</p>
+            <h2 id="ai-work-title">AI 视频作品展<span>。</span></h2>
+            <p>用即梦探索宠物内容的不同表达。从人物情景、角色互动到产品与视觉特效，记录创意变成画面的过程。</p>
+            <div className="tool-tags"><span>即梦 AI</span><span>场景构思</span><span>角色互动</span><span>视觉特效</span><span>产品镜头</span></div>
+          </div>
+          <AiVideoGallery />
+        </section>
+
         <section className="about-section container" id="about" aria-labelledby="about-title">
           <div className="about-heading">
             <p className="eyebrow">03 — A LITTLE ABOUT ME</p>
             <h2 id="about-title">有设计基础，<br />也有把事做好的耐心<span>。</span></h2>
             <p>你好，我是谢达，毕业于长沙环境保护职业技术学院环境艺术设计专业。设计学习让我建立了构图、色彩与空间表现的基础，也让我开始探索 AI 在视觉与内容创作中的应用。</p>
-            <p>现在，我希望围绕剪辑运营、内容创作、图片创作和智能体应用开展工作，把创意表达与实际需求连接起来。在灯光设计、别墅改造和家装公司的工作经历，让我更重视沟通、执行与协作。</p>
+            <p>有一年多全职短视频剪辑经验，熟练使用剪映与即梦，关注从分镜到 AI 画面生成、剪辑成片的完整流程。希望从事 AI 内容制作 / AIGC 视频工作，也计划学习低代码智能体工具。</p>
             <div className="resume-actions">
-              <a className="action secondary-action" href={resumeUrl} download={resumeFilename}><Download size={16} />下载 PDF 简历</a>
+              <a className="action secondary-action" href="#ai-work">查看 AI 视频作品<ArrowUpRight size={16} /></a>
               <PrintResume />
             </div>
           </div>
@@ -112,7 +122,7 @@ export default function Home() {
             <dl>
               <div><dt>姓名</dt><dd className="resume-name">谢达 <span>XIE DA</span></dd></div>
               <div><dt>毕业院校</dt><dd>长沙环境保护职业技术学院</dd></div>
-              <div><dt>专业学历</dt><dd>环境艺术设计 · 大专<br /><span className="education-detail">2023 — 2025 · 专业排名前 3%</span></dd></div>
+              <div><dt>专业学历</dt><dd>环境艺术设计 · 大专<br /><span className="education-detail">2023 — 2025</span></dd></div>
               <div><dt>所在城市</dt><dd className="resume-location"><MapPin size={16} />长沙</dd></div>
               <div><dt>求职方向</dt><dd className="resume-interests">{interests.map((interest) => <span key={interest}>{interest}</span>)}</dd></div>
               <div><dt>当前状态</dt><dd className="resume-status"><span className="status-dot" />正在寻找工作机会</dd></div>
@@ -136,10 +146,13 @@ export default function Home() {
             </ol>
           </div>
           <aside className="skills-card" aria-labelledby="skills-title">
-            <div className="skills-card-heading"><Sparkles size={19} /><h3 id="skills-title">设计基础与工具</h3></div>
-            <p>具备空间设计、三维建模和效果图表现基础，关注画面的构图、材质、光影与色彩。</p>
-            <div className="tool-tags">{designTools.map((tool) => <span key={tool}>{tool}</span>)}</div>
-            <div className="skills-note"><span>正在拓展</span><p>AIGC 视觉生成、产品图片与广告海报创作，探索提示词整理与后期画面优化。</p></div>
+            <div className="skills-card-heading"><Sparkles size={19} /><h3 id="skills-title">AIGC 内容与剪辑</h3></div>
+            <p><strong>剪映：</strong>分镜、素材编排、字幕配音与节奏剪辑，独立完成短视频成片。</p>
+            <p><strong>即梦 AI：</strong>首帧图、视频生成、运镜、口型同步；关注角色、道具与画风的一致性。</p>
+            <p><strong>内容制作：</strong>提示词与分镜描述、同类内容拆解、宠物用品带货、多账号分发与批量产出。</p>
+            <div className="tool-tags"><span>剪映</span><span>即梦 AI</span><span>提示词</span><span>短视频剪辑</span><span>宠物用品内容</span></div>
+            <div className="skills-note"><span>设计基础</span><p>环境艺术设计专业，具备构图、光影、色彩与空间表现基础。</p><div className="tool-tags">{designTools.map((tool) => <span key={tool}>{tool}</span>)}</div></div>
+            <div className="skills-note"><span>未来学习方向</span><p>可灵、Runway、Midjourney、Stable Diffusion；低代码智能体工具 Coze / Dify。</p></div>
           </aside>
         </section>
 
@@ -161,9 +174,9 @@ export default function Home() {
               <ArrowUpRight size={18} className="contact-arrow" />
             </a>
           </div>
-          <a className="resume-file-card" href={resumeUrl} target="_blank" rel="noopener noreferrer" aria-label="打开谢达的 PDF 简历，将在新标签页显示">
-            <span className="resume-folder-icon" aria-hidden="true"><FolderOpen size={88} strokeWidth={1.35} /></span>
-            <span className="resume-file-info"><span className="resume-file-type">PDF</span><strong>谢达 · 个人简历</strong><span className="resume-file-meta">AIGC 视觉设计方向 · 205 KB</span></span>
+          <a className="resume-file-card" href="#ai-work" aria-label="查看 AI 视频作品">
+            <span className="resume-folder-icon" aria-hidden="true"><Film size={88} strokeWidth={1.35} /></span>
+            <span className="resume-file-info"><span className="resume-file-type">AI VIDEO</span><strong>谢达 · AI 视频制作</strong><span className="resume-file-meta">5 条精选视频 · 观看作品</span></span>
             <span className="resume-file-open" aria-hidden="true"><ArrowUpRight size={25} /></span>
           </a>
         </section>
@@ -171,7 +184,7 @@ export default function Home() {
 
       <footer className="site-footer container">
         <a href="#home" className="wordmark" aria-label="谢达，返回首页">XD<span>.</span></a>
-        <p>谢达 · 内容创作与智能体应用</p>
+        <p>谢达 · AI 内容制作与 AIGC 视频</p>
         <a href="#home" className="back-to-top">回到顶部<ArrowUpRight size={15} /></a>
       </footer>
     </div>

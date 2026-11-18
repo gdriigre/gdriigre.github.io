@@ -9,6 +9,7 @@ const items: NavItem[] = [
   { label: '首页', href: '#home' },
   { label: '创作方向', href: '#creative' },
   { label: '作品', href: '#projects' },
+  { label: 'AI视频', href: '#ai-work' },
   { label: '关于我', href: '#about' },
   { label: '联系我', href: '#contact' },
 ];

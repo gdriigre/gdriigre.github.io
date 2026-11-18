@@ -33,6 +33,7 @@ yarn-error.log*
 .vercel
 .openai/
 next-env.d.ts
+*.tsbuildinfo
 /dist/
 /.wrangler/
 /outputs/

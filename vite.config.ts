@@ -52,7 +52,8 @@ export default defineConfig(async () => {
       : undefined,
     plugins: [
       vinext(),
-      sites(),
+      // GitHub Pages is published as static files and does not use Sites hosting.
+      ...(process.env.LOCAL_PREVIEW_BUILD === '1' || process.env.npm_lifecycle_event === 'build:pages' ? [] : [sites()]),
       cloudflare({
         viteEnvironment: { name: 'rsc', childEnvironments: ['ssr'] },
         config: localBindingConfig,
